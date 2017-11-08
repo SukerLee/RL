@@ -11,7 +11,7 @@ soup = BeautifulSoup(res.text, 'lxml')
 # 使用迴圈進入到目標頁面中的每個主題頁面
 
 for article in soup.select('.r-ent a'):
-    url = 'https://www.ptt.cc' + article['href']
+    url = 'https://www.ptt.cc' + article['h_url['href'], article.text, index))ref']
     res = requests.get(url)
     soup = BeautifulSoup(res.text, 'lxml')
 
@@ -24,4 +24,4 @@ for article in soup.select('.r-ent a'):
 
                 urlretrieve(img_url['href'], '/Users/suker/Desktop/beauti/{}_{}.jpg'.format(article.text, index))
             except:
-                print('{} {}_{}.jpg 下載失敗!'.format(img_url['href'], article.text, index))
+                print('{} {}_{}.jpg 下載失敗!'.format(img
