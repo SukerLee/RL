@@ -1,27 +1,35 @@
-import requests
-from bs4 import BeautifulSoup
-from urllib.request import urlretrieve
-import re
+import tkinter as tk
 
-# 目標頁面
 
-res = requests.get('https://www.ptt.cc/bbs/Beauty/index2109.html')
-soup = BeautifulSoup(res.text, 'lxml')
+window = tk.Tk()
+window.title('WoW')
+window.geometry('400x300')
 
-# 使用迴圈進入到目標頁面中的每個主題頁面
+#on_hit = False
+# e = tk.Entry(window,show=None)
+# e.pack()
+def test():
+    print('test')
 
-for article in soup.select('.r-ent a'):
-    url = 'https://www.ptt.cc' + article['href']
-    res = requests.get(url)
-    soup = BeautifulSoup(res.text, 'lxml')
+t = tk.Text(window, height=5)
+t.pack()
 
-    # 判斷網址中有沒有圖片，如果有就開始下載
+tk.Label(window, text='起始值：').place(x=10,y=100)
+tk.Entry(window,show=None).place(x=60,y=95)
 
-    if len(soup.findAll('a', {'href': re.compile('http:\/\/i\.imgur\.com\/.*')})) > 0:
-        for index, img_url in enumerate(soup.findAll('a', {'href': re.compile('http:\/\/i\.imgur\.com\/.*')})):
-            try:
-                # 記得更改想要下載到的位置
+tk.Label(window, text='回數：').place(x=10,y=120)
+tk.Entry(window,show=None).place(x=60,y=120)
 
-                urlretrieve(img_url['href'], 'D:\{}_{}.jpg'.format(article.text, index))
-            except:
-                print('{} {}_{}.jpg 下載失敗!'.format(img_url['href'], article.text, index))
+tk.Label(window, text='倍數：').place(x=10,y=150)
+tk.Entry(window,show=None).place(x=60,y=145)
+
+b2 = tk.Button(window, text='測試', width=15, height=2, command=test)
+b2.pack(side='left')
+
+b = tk.Button(window, text='開網頁', width=15, height=2, command=test)
+b.pack(side='left')
+
+b3 = tk.Button(window, text='開始下注', width=15, height=2, command=test)
+b3.pack(side='left')
+
+window.mainloop()
